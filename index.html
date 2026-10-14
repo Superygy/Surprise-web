@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff2f5">
+<title>A Little Surprise for You ♡</title>
+<style>
+  :root {
+    --rose: #d96583;
+    --rose-dark: #a94060;
+    --pink: #ffe8ee;
+    --cream: #fffaf4;
+    --ink: #583e49;
+    --muted: #8b6f7b;
+    --gold: #d6ac76;
+    --shadow: 0 24px 70px rgba(135, 67, 91, .15);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--ink);
+    background:
+      radial-gradient(ellipse at 8% 5%, rgba(255, 211, 224, .65), transparent 34%),
+      radial-gradient(ellipse at 95% 85%, rgba(255, 226, 205, .55), transparent 30%),
+      #fff8f6;
+    font-family: ui-rounded, "Segoe UI", system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+  button { font: inherit; cursor: pointer; }
+  .ambient-hearts { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+  .ambient-hearts span { position: absolute; bottom: -50px; opacity: 0; color: #ed9bb0; animation: floatUp linear infinite; }
+  .ambient-hearts span:nth-child(1) { left: 7%; animation-duration: 15s; animation-delay: 1s; font-size: 20px; }
+  .ambient-hearts span:nth-child(2) { left: 22%; animation-duration: 18s; animation-delay: 6s; font-size: 13px; }
+  .ambient-hearts span:nth-child(3) { left: 43%; animation-duration: 14s; animation-delay: 3s; font-size: 24px; }
+  .ambient-hearts span:nth-child(4) { left: 68%; animation-duration: 17s; animation-delay: 8s; font-size: 16px; }
+  .ambient-hearts span:nth-child(5) { left: 86%; animation-duration: 20s; animation-delay: 4s; font-size: 22px; }
+  @keyframes floatUp { 0% { transform: translateY(0) rotate(-8deg); opacity: 0; } 12% { opacity: .52; } 85% { opacity: .45; } 100% { transform: translateY(-115vh) rotate(22deg); opacity: 0; } }
+  .page-shell { position: relative; z-index: 1; width: min(1140px, calc(100% - 36px)); margin: 0 auto; padding: 26px 0 34px; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: clamp(28px, 6vh, 64px); }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: Georgia, serif; font-size: 19px; letter-spacing: .01em; color: var(--rose-dark); }
+  .brand-mark { display: grid; place-items: center; height: 37px; width: 37px; border-radius: 50%; background: #fff; box-shadow: 0 4px 14px rgba(190, 111, 134, .13); }
+  .music-button { border: 1px solid rgba(199, 123, 147, .32); color: var(--rose-dark); background: rgba(255,255,255,.72); padding: 11px 16px; border-radius: 999px; display: flex; align-items: center; gap: 8px; box-shadow: 0 5px 16px rgba(142, 80, 100, .06); transition: transform .2s, background .2s; }
+  .music-button:hover { transform: translateY(-2px); background: white; }
+  .music-dot { width: 8px; height: 8px; border-radius: 50%; background: #dc7f99; display: inline-block; }
+  .hero { display: grid; grid-template-columns: 1.03fr .97fr; align-items: center; gap: clamp(28px, 6vw, 76px); min-height: min(660px, 75vh); }
+  .eyebrow { display: flex; align-items: center; gap: 10px; color: var(--rose); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; font-weight: 750; margin-bottom: 18px; }
+  .eyebrow:before { content: ""; width: 28px; height: 1px; background: var(--rose); }
+  h1 { font-family: Georgia, "Times New Roman", serif; font-weight: 500; letter-spacing: -.045em; font-size: clamp(46px, 6.7vw, 81px); line-height: 1.02; margin: 0; color: #533b46; }
+  h1 em { color: var(--rose); font-weight: 400; }
+  .intro-copy { max-width: 480px; color: var(--muted); line-height: 1.85; font-size: clamp(15px, 1.4vw, 17px); margin: 23px 0 28px; }
+  .reveal-button { display: inline-flex; align-items: center; justify-content: center; gap: 12px; border: 0; border-radius: 999px; padding: 16px 24px; color: white; background: linear-gradient(135deg, #e17e99, #c85275); box-shadow: 0 12px 25px rgba(201, 82, 117, .24); transition: transform .2s, box-shadow .2s; }
+  .reveal-button:hover { transform: translateY(-3px); box-shadow: 0 16px 30px rgba(201, 82, 117, .3); }
+  .tiny-note { color: #ad929d; font-size: 12px; margin: 16px 0 0 5px; }
+  .photo-wrap { position: relative; max-width: 445px; width: 100%; justify-self: center; padding: 13px; border-radius: 46% 46% 24px 24px; background: rgba(255,255,255,.76); border: 1px solid rgba(255,255,255,.95); box-shadow: var(--shadow); transform: rotate(1deg); }
+  .photo-wrap:before { content: ""; position: absolute; inset: -10px 18px 16px -10px; border: 1px solid rgba(222, 151, 171, .4); border-radius: 46% 46% 24px 24px; z-index: -1; }
+  .photo-wrap img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 44%; border-radius: 43% 43% 17px 17px; }
+  .photo-caption { position: absolute; left: -28px; bottom: 35px; padding: 13px 17px; background: rgba(255, 250, 244, .95); border: 1px solid rgba(224, 187, 163, .5); border-radius: 17px; box-shadow: 0 8px 28px rgba(87, 50, 67, .1); transform: rotate(-5deg); font-family: Georgia, serif; color: #8f5368; font-size: 17px; }
+  .photo-caption small { display: block; font-family: inherit; font-size: 10px; text-transform: uppercase; letter-spacing: .14em; color: #b88a98; margin-top: 5px; }
+  .sparkle { position: absolute; color: #d9a86b; font-size: 27px; }
+  .sparkle.one { right: -18px; top: 20%; }
+  .sparkle.two { left: 12px; top: -18px; font-size: 20px; }
+  .bottom-note { text-align: center; padding: 35px 0 6px; color: #ba9aa5; font-size: 12px; letter-spacing: .07em; }
+  .bottom-note span { color: var(--rose); }
+  /* The surprise letter overlay */
+  .overlay { position: fixed; inset: 0; background: rgba(66, 39, 52, .42); backdrop-filter: blur(8px); display: grid; place-items: center; padding: 18px; z-index: 10; opacity: 0; visibility: hidden; transition: opacity .28s, visibility .28s; overflow-y: auto; }
+  .overlay.open { opacity: 1; visibility: visible; }
+  .letter-card { position: relative; width: min(680px, 100%); max-height: min(90vh, 900px); overflow-y: auto; padding: clamp(25px, 5.5vw, 53px); border-radius: 19px; background: linear-gradient(145deg, #fffdf8, #fff7f3); border: 1px solid #fff; box-shadow: 0 28px 90px rgba(53, 24, 39, .28); transform: translateY(22px) scale(.98); transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+  .overlay.open .letter-card { transform: translateY(0) scale(1); }
+  .letter-card:before { content: ""; position: absolute; pointer-events: none; inset: 13px; border: 1px solid rgba(220, 164, 179, .38); border-radius: 12px; }
+  .letter-inner { position: relative; z-index: 1; }
+  .close-letter { position: absolute; top: 25px; right: 25px; z-index: 2; border: 0; width: 36px; height: 36px; border-radius: 50%; background: #fbe8ed; color: #a34d68; font-size: 20px; }
+  .letter-top { text-align: center; color: var(--rose); font-size: 12px; letter-spacing: .21em; text-transform: uppercase; }
+  .letter-title { text-align: center; font-family: Georgia, serif; font-weight: 400; font-size: clamp(32px, 6vw, 47px); line-height: 1.1; margin: 15px 0 26px; color: #694553; }
+  .letter-title em { color: var(--rose); }
+  .letter-body { font-family: Georgia, "Times New Roman", serif; font-size: clamp(16px, 2.2vw, 18px); line-height: 1.85; color: #6e515d; }
+  .letter-body p { margin: 0 0 15px; }
+  .signoff { color: var(--rose-dark); font-style: italic; margin-top: 18px !important; }
+  .divider-heart { display: flex; gap: 12px; align-items: center; justify-content: center; margin: 25px 0 24px; color: #d7839b; }
+  .divider-heart:before, .divider-heart:after { content: ""; width: 60px; height: 1px; background: #edccd5; }
+  .question { text-align: center; padding: 19px 0 0; }
+  .question h3 { font-family: Georgia, serif; font-size: clamp(24px, 4vw, 32px); font-weight: 400; margin: 0 0 7px; color: #6c4052; }
+  .question-subtitle { color: #a48290; font-size: 13px; margin: 0 0 20px; }
+  .choice-zone { min-height: 86px; width: 100%; max-width: 360px; margin: 0 auto; position: relative; display: flex; justify-content: center; align-items: center; gap: 15px; overflow: hidden; border-radius: 20px; }
+  .choice { border-radius: 999px; padding: 12px 24px; border: 1px solid #e6b5c4; transition: transform .22s ease, left .22s ease, top .22s ease, opacity .25s ease; white-space: nowrap; }
+  .choice-yes { background: linear-gradient(135deg, #e17e99, #c85275); color: white; border-color: transparent; box-shadow: 0 7px 16px rgba(201,82,117,.2); }
+  .choice-no { background: #fff; color: #a75a73; position: relative; }
+  .choice-no.dodging { position: absolute; }
+  .choice-no.vanish { opacity: 0; pointer-events: none; transform: scale(.05) !important; }
+  .reaction { min-height: 27px; margin: 11px auto 0; max-width: 420px; color: #c05276; font-size: 14px; line-height: 1.55; text-align: center; }
+  .yes-celebration { display: none; margin: 16px auto 0; padding: 13px 16px; border-radius: 14px; max-width: 430px; background: #ffedf2; color: #a63f63; line-height: 1.6; }
+  .yes-celebration.show { display: block; animation: popIn .4s ease both; }
+  @keyframes popIn { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: scale(1); } }
+  .confetti-heart { position: fixed; z-index: 30; pointer-events: none; animation: burst 1.7s ease-out forwards; }
+  @keyframes burst { 0% { opacity: 0; transform: translate(0,0) scale(.4) rotate(0); } 12% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.3) rotate(var(--rot)); } }
+  .music-hint { position: fixed; bottom: 18px; right: 18px; z-index: 5; max-width: min(320px, calc(100% - 36px)); border: 1px solid rgba(224, 177, 192, .7); border-radius: 14px; background: #fffaf9; box-shadow: 0 8px 28px rgba(90,42,62,.12); padding: 13px 16px; color: #8c596d; font-size: 13px; line-height: 1.55; opacity: 0; transform: translateY(10px); pointer-events: none; transition: .25s; }
+  .music-hint.show { opacity: 1; transform: translateY(0); }
+  @media (max-width: 760px) {
+    .page-shell { width: min(540px, calc(100% - 30px)); padding-top: 17px; }
+    header { margin-bottom: 27px; }
+    .brand { font-size: 16px; }
+    .music-button { padding: 10px 12px; font-size: 12px; }
+    .hero { grid-template-columns: 1fr; gap: 42px; min-height: auto; }
+    .hero-copy { text-align: center; }
+    .eyebrow { justify-content: center; }
+    .eyebrow:before { display: none; }
+    .intro-copy { margin-left: auto; margin-right: auto; }
+    .tiny-note { margin-left: 0; }
+    .photo-wrap { width: min(370px, 83%); }
+    .photo-caption { left: -20px; bottom: 28px; }
+    .bottom-note { padding-top: 38px; }
+    .letter-card { padding: 40px 25px 29px; }
+    .letter-card:before { inset: 9px; }
+    .close-letter { top: 16px; right: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *:before, *:after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+</style>
+</head>
+<body>
+<div class="ambient-hearts" aria-hidden="true"><span>♡</span><span>♥</span><span>♡</span><span>♥</span><span>♡</span></div>
+<div class="page-shell">
+  <header>
+    <div class="brand"><span class="brand-mark">♡</span><span>a little something for you</span></div>
+    <button class="music-button" id="musicToggle" type="button" aria-label="Play background music"><span class="music-dot" id="musicDot"></span><span id="musicLabel">Play our song</span> ♪</button>
+  </header>
+  <main class="hero">
+    <section class="hero-copy">
+      <div class="eyebrow">just because you matter</div>
+      <h1>For the girl<br>who makes<br>life feel <em>lovelier.</em></h1>
+      <p class="intro-copy">No special occasion. No big reason. Just a little reminder that you are cared for, thought about, and loved more than these little words could ever explain.</p>
+      <button class="reveal-button" id="revealButton" type="button"><span>Reveal the surprise</span><span aria-hidden="true">♡</span></button>
+      <p class="tiny-note">made with lots of love, just for you ✧</p>
+    </section>
+    <div class="photo-wrap">
+      <span class="sparkle one" aria-hidden="true">✧</span><span class="sparkle two" aria-hidden="true">✦</span>
+      <img src="assets/Playful Moment in a Cozy Café.png" alt="A romantic couple standing together by the water">
+      <div class="photo-caption">you & me, always<small>my favourite kind of magic</small></div>
+    </div>
+  </main>
+  <footer class="bottom-note">a small corner of the internet, <span>made just for you</span> ♡</footer>
+</div>
+
+<div class="overlay" id="letterOverlay" role="dialog" aria-modal="true" aria-labelledby="letterHeading" aria-hidden="true">
+  <article class="letter-card">
+    <button class="close-letter" id="closeLetter" type="button" aria-label="Close the letter">×</button>
+    <div class="letter-inner">
+      <div class="letter-top">open when you need a little love</div>
+      <h2 class="letter-title" id="letterHeading">To my <em>Cutuu</em> ♡</h2>
+      <div class="letter-body">
+        <p>Hiiiii my Cutuuuu,</p>
+        <p>I just wanted to make a tiny corner of the world that reminds you how special you are to me. You don't need to do anything extraordinary to deserve love. Just being <em>you</em> is already more than enough.</p>
+        <p>I hope you know that even on your quiet days, your messy days, and the days when you don't feel like your brightest self, you still mean so, so much to me. Your smile can make an ordinary moment feel beautiful, and the thought of you has a way of making my day softer.</p>
+        <p>If I could, I'd give you a big hug right now and keep you there for a little longer—just so you could feel, without needing to wonder, how deeply you are cared for. I might not always find the perfect words, but I will always want to make you feel safe, valued, and loved.</p>
+        <p>So whenever life feels a bit too much, come back here and remember: someone is cheering for you, thinking of you, and smiling because you exist. And yes, that someone is your Dudu. Hehe. 🥹💗</p>
+        <p class="signoff">All my love, all my hugs, and one extra forehead kiss…<br>Your Dudu ♡</p>
+      </div>
+      <div class="divider-heart" aria-hidden="true">♥</div>
+      <section class="question" aria-labelledby="loveQuestion">
+        <h3 id="loveQuestion">Do you Love your Dudu? 🥺</h3>
+        <p class="question-subtitle">choose carefully, Cutuu… hehe 🙈</p>
+        <div class="choice-zone" id="choiceZone">
+          <button class="choice choice-yes" id="yesButton" type="button">Yes, of course! 💗</button>
+          <button class="choice choice-no" id="noButton" type="button">No 🙈 (try clicking me)</button>
+        </div>
+        <div class="reaction" id="reaction" aria-live="polite"></div>
+        <div class="yes-celebration" id="yesCelebration" aria-live="polite">Eeeee, I knew ittt! 🥹💖 Come here, you deserve the biggest hug ever. Dudu loves you soooo much! ♡</div>
+      </section>
+    </div>
+  </article>
+</div>
+<div class="music-hint" id="musicHint" role="status">To add your song, copy an MP3 into the <strong>assets</strong> folder and name it <strong>our-song.mp3</strong>. Then click this button again. ♡</div>
+<audio id="backgroundMusic" src="assets/our-song.mp3" loop preload="none"></audio>
+<script>
+(() => {
+  const overlay = document.getElementById('letterOverlay');
+  const revealButton = document.getElementById('revealButton');
+  const closeLetter = document.getElementById('closeLetter');
+  const noButton = document.getElementById('noButton');
+  const yesButton = document.getElementById('yesButton');
+  const choiceZone = document.getElementById('choiceZone');
+  const reaction = document.getElementById('reaction');
+  const yesCelebration = document.getElementById('yesCelebration');
+  const music = document.getElementById('backgroundMusic');
+  const musicToggle = document.getElementById('musicToggle');
+  const musicLabel = document.getElementById('musicLabel');
+  const musicHint = document.getElementById('musicHint');
+  const musicDot = document.getElementById('musicDot');
+  let noClicks = 0;
+  let musicHintTimer;
+  let musicReady = true;
+
+  function openLetter() {
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    window.setTimeout(() => closeLetter.focus(), 80);
+  }
+  function hideLetter() {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    revealButton.focus();
+  }
+  revealButton.addEventListener('click', openLetter);
+  closeLetter.addEventListener('click', hideLetter);
+  overlay.addEventListener('click', (event) => { if (event.target === overlay) hideLetter(); });
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && overlay.classList.contains('open')) hideLetter(); });
+
+  function teaseNo() {
+    noClicks += 1;
+    yesCelebration.classList.remove('show');
+    noButton.classList.add('dodging');
+    const zone = choiceZone.getBoundingClientRect();
+    const btn = noButton.getBoundingClientRect();
+    const maxX = Math.max(0, zone.width - btn.width - 4);
+    const maxY = Math.max(0, zone.height - btn.height - 4);
+    // Pick a new spot well away from the last one, while keeping the button inside its play area.
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+    noButton.style.left = `${x}px`;
+    noButton.style.top = `${y}px`;
+    const scale = Math.max(.17, 1 - noClicks * .19);
+    noButton.style.transform = `scale(${scale}) rotate(${Math.random() > .5 ? 9 : -9}deg)`;
+
+    if (noClicks === 1) {
+      reaction.textContent = 'Ohooo? Trying to break your Dudu’s heart? 😭 The “No” button is shy, hehe!';
+    } else if (noClicks === 2) {
+      reaction.textContent = 'Areee Cutuu, it ran away! 😭 Maybe it knows you love your Dudu. Try again…';
+    } else if (noClicks === 3) {
+      reaction.textContent = 'Caught you trying again! Nope button is getting smaller… just like your chances of escaping this question. 😌💗';
+    } else if (noClicks >= 4) {
+      reaction.textContent = 'Nopeee, that option has gone on a little holiday! 😂 Nice try, Cutuu. Your Dudu is waiting for that “Yes”. 💞';
+      noButton.classList.add('vanish');
+      noButton.setAttribute('aria-hidden', 'true');
+      noButton.disabled = true;
+      window.setTimeout(() => { noButton.style.display = 'none'; }, 300);
+    }
+  }
+  noButton.addEventListener('click', teaseNo);
+
+  function celebrateYes() {
+    reaction.textContent = '';
+    yesCelebration.classList.add('show');
+    noButton.classList.add('vanish');
+    noButton.disabled = true;
+    noButton.setAttribute('aria-hidden', 'true');
+    makeHeartBurst();
+  }
+  yesButton.addEventListener('click', celebrateYes);
+
+  function makeHeartBurst() {
+    const symbols = ['💗', '♡', '💕', '♥', '✨'];
+    for (let i = 0; i < 24; i++) {
+      const heart = document.createElement('span');
+      heart.className = 'confetti-heart';
+      heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      heart.style.left = `${45 + Math.random() * 10}vw`;
+      heart.style.top = `${43 + Math.random() * 14}vh`;
+      heart.style.fontSize = `${14 + Math.random() * 20}px`;
+      heart.style.setProperty('--dx', `${(Math.random() - .5) * 85}vw`);
+      heart.style.setProperty('--dy', `${-20 - Math.random() * 70}vh`);
+      heart.style.setProperty('--rot', `${(Math.random() - .5) * 90}deg`);
+      document.body.appendChild(heart);
+      window.setTimeout(() => heart.remove(), 1800);
+    }
+  }
+
+  function showMusicHint() {
+    musicHint.classList.add('show');
+    window.clearTimeout(musicHintTimer);
+    musicHintTimer = window.setTimeout(() => musicHint.classList.remove('show'), 5500);
+  }
+  music.addEventListener('error', () => { musicReady = false; });
+  musicToggle.addEventListener('click', async () => {
+    if (!musicReady || music.error) {
+      showMusicHint();
+      music.load();
+      // If the file was just added, give the browser another attempt on the next click.
+      musicReady = true;
+      return;
+    }
+    if (music.paused) {
+      try {
+        await music.play();
+        musicLabel.textContent = 'Pause our song';
+        musicDot.style.background = '#69ad86';
+        musicToggle.setAttribute('aria-label', 'Pause background music');
+        musicHint.classList.remove('show');
+      } catch (error) {
+        showMusicHint();
+      }
+    } else {
+      music.pause();
+      musicLabel.textContent = 'Play our song';
+      musicDot.style.background = '#dc7f99';
+      musicToggle.setAttribute('aria-label', 'Play background music');
+    }
+  });
+  music.addEventListener('ended', () => { musicLabel.textContent = 'Play our song'; });
+})();
+</script>
+</body>
+</html>
